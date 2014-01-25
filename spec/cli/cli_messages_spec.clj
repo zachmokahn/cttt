@@ -1,11 +1,11 @@
 (ns ttt.messages-spec
   (:require [speclj.core :refer :all]
             [ttt.constants :refer :all]
-            [ttt.messages :refer :all]))
+            [cli.cli-messages :refer :all]))
 
 (let [x (:player marker)
       o (:computer marker)
-      b (:empty marker)]
+      b (:blank marker)]
 
 (describe "Messages Spec"
   (describe "render"
