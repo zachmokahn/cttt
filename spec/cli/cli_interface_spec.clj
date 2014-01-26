@@ -2,6 +2,9 @@
   (:require [speclj.core :refer :all]
             [cli.cli-interface :refer :all]))
 
+(let [marker {:blank "-"
+              :player "x"
+              :computer "o"}]
 (describe "CLI Spec"
   (around [it]
     (with-out-str (it)))
@@ -9,10 +12,10 @@
   (describe "cli-display-board"
     (it "prints board to command line"
       (with-redefs [cli.cli-messages/display-board
-      (fn [board] "board here")]
+      (fn [board marker] "board here")]
         (should= "board here\n"
           (with-out-str(
-            cli-display-board ["board"])))))
+            cli-display-board ["board"] marker)))))
 
   (describe "human-win-message"
     (it "prints message to command line"
@@ -47,4 +50,4 @@
         (fn [] "select index")]
           (should= 0
             (with-in-str "0"
-              (cli-prompt-for-move ["board"]))))))))
+              (cli-prompt-for-move ["board"])))))))))

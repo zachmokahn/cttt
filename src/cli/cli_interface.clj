@@ -1,8 +1,8 @@
 (ns cli.cli-interface
   (:require [cli.cli-messages :refer :all]))
 
-(defn cli-display-board [board]
-  (println (display-board board)))
+(defn cli-display-board [board markers]
+  (println (display-board board markers)))
 
 (defn cli-draw-message []
   (println (draw-message)))

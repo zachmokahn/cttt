@@ -1,12 +1,12 @@
 (ns cli.cli-players
-  (:require [ttt.ai :refer :all]
-            [cli.cli-interface :refer :all]))
+  (:require [cli.cli-interface :refer :all]
+            [ttt.ai :only :best-move]))
 
 (def cli-human
   {:move cli-prompt-for-move})
 
 (def cli-computer
-  {:move best-move})
+  {:move ttt.ai/best-move})
 
 (def cli-players
   {:player cli-human

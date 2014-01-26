@@ -1,6 +1,6 @@
 (ns cli.core
-  (:require [ttt.board :refer :all]
-            [cli.cli-game :refer :all]))
+  (:require [cli.cli-game :refer :all]
+            [ttt.board :as board]))
 
 (defn -main []
-  (game new-board :player))
+  (game board/new-board :player))

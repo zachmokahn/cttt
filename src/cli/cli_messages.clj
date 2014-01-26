@@ -1,16 +1,15 @@
-(ns cli.cli-messages
-  (:require [ttt.constants :refer :all]))
+(ns cli.cli-messages)
 
-(defn render [coll index]
+(defn render [coll index marker]
   (str " " (if (= (get coll index) (:blank marker)) index (get coll index)) " "))
 
-(defn display-board [board]
+(defn display-board [board marker]
   (str
-  (render board 0) "|" (render board 1) "|"  (render board 2)
+  (render board 0 marker) "|" (render board 1 marker) "|"  (render board 2 marker)
   "\n-----------\n"
-  (render board 3) "|" (render board 4) "|" (render board 5)
+  (render board 3 marker) "|" (render board 4 marker) "|" (render board 5 marker)
   "\n-----------\n"
-  (render board 6) "|" (render board 7) "|" (render board 8)))
+  (render board 6 marker) "|" (render board 7 marker) "|" (render board 8 marker)))
 
 (defn draw-message []
   "Game is a draw")
