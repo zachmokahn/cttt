@@ -12,7 +12,7 @@
 (describe "move"
   (it "calls prompt functino for player move"
     (should= cli.cli-interface/cli-prompt-for-move
-             (:move cli-human)))
-  (it "delegates computer move to ai"
-    (should= ttt.ai/best-move
-             (:move cli-computer))))
+             (:move cli-human))))
+  ;; (it "delegates computer move to ai"
+  ;;   (should= ttt.ai/best-move
+  ;;            (:move cli-computer))))

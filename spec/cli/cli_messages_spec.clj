@@ -1,4 +1,4 @@
-(ns ttt.messages-spec
+(ns cli.cli-messages-spec
   (:require [speclj.core :refer :all]
             [ttt.constants :refer :all]
             [cli.cli-messages :refer :all]))
