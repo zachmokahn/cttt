@@ -21,7 +21,7 @@
   (cli-display-board board)
   (if (game-over? board)
       (get-results board)
-      (let [index ((:move (turn cli-players)) (empty-spaces board))]
+      (let [index ((:move (turn cli-players)) board)]
           (if (valid-move? board index)
            (recur (move board index turn) (change-turn turn))
             (recur board turn)))))
