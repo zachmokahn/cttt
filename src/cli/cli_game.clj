@@ -1,27 +1,42 @@
 (ns cli.cli-game
   (:require [ttt.ai            :refer :all]
             [ttt.board         :refer :all]
+            [ttt.constants     :refer :all]
+            [ttt.rules         :refer :all]
+            [cli.cli-options   :refer :all]
             [cli.cli-players   :refer :all]
             [cli.cli-interface :refer :all]
-            [ttt.constants     :refer :all]
-            [cli.cli-messages  :refer :all]
-            [ttt.rules         :refer :all]))
+            [cli.cli-messages  :refer :all]))
 
-(defn get-winner [board]
-  (if (win? board :player)
-      (cli-human-win-message)
-      (cli-computer-win-message)))
+(defn get-winner [board players]
+  (if (win? board :player1)
+    (if (= (:player1 players) :computer)
+      (cli-computer-win-message)
+      (cli-win-message "Player 1"))
+    (if (= (:player2 players) :computer)
+      (cli-computer-win-message)
+      (cli-win-message "Player 2"))))
 
-(defn get-results [board]
+(defn get-results [board players]
   (if (draw? board)
-      (cli-draw-message)
-      (get-winner board)))
+    (cli-draw-message)
+    (get-winner board players)))
 
-(defn game [board turn]
+(defn get-move [board turn players difficulty]
+  (if (= (turn players) :player)
+      (cli-prompt-for-move board)
+      ((difficulty cli-computer-difficulty) board turn)))
+
+(defn game [board turn option]
+  (let [game-mode  (:game-mode  option)
+        players    (game-mode cli-game-play)]
   (cli-display-board board)
-  (if (game-over? board)
-      (get-results board)
-      (let [index ((:move (turn cli-players)) board)]
-          (if (valid-move? board index)
-           (recur (move board index turn) (change-turn turn))
-            (recur board turn)))))
+    (if (game-over? board)
+      (get-results board players)
+      (let [difficulty (:difficulty option)
+            index      (get-move board turn players difficulty)
+            next-board (move board index turn)
+            opponent   (change-turn turn)]
+      (if (valid-move? board index)
+        (recur next-board opponent option)
+        (recur board turn option))))))

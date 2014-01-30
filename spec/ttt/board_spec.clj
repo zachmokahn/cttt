@@ -8,7 +8,7 @@
       b (:blank marker)
       board [b b b b b b b b b]]
 
-(describe "Board Spec"
+(describe "TTT BOARD SPEC"
 
   (describe "new-board"
     (it "generates an empty board"

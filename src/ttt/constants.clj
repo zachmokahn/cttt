@@ -1,7 +1,7 @@
 (ns ttt.constants)
 
 (def marker
-  {:player "x"
-   :computer "o"
+  {:player1 "x"
+   :player2 "o"
    :blank "-"})
 

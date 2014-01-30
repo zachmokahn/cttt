@@ -2,25 +2,72 @@
   (:require [speclj.core :refer :all]
             [cli.cli-interface :refer :all]))
 
-(describe "CLI Spec"
+(describe "CLI INTERFACE SPEC"
   (around [it]
     (with-out-str (it)))
 
+ (describe "cli-game-options-prompt"
+   (it "prints game options for game-mode"
+     (with-redefs [cli.cli-messages/game-mode-message
+     (fn [] "game-mode")]
+        (should= "game-mode\n"
+        (with-out-str
+          (with-in-str "2"
+            (cli-prompt-for-game-mode))))))
+
+    (it "returns game-mode key"
+      (with-redefs [cli.cli-messages/game-mode-message
+      (fn [] "")]
+        (should= :pvc
+          (with-in-str "1"
+            (cli-prompt-for-game-mode)))
+        (should= :pvp
+          (with-in-str "2"
+            (cli-prompt-for-game-mode)))
+        (should= :cvc
+          (with-in-str "3"
+             (cli-prompt-for-game-mode)))
+        (should= :pvc
+          (with-in-str "banana"
+              (cli-prompt-for-game-mode))))))
+
+  (describe "cli-prompt-for-difficulty"
+   (it "prints game options for difficulty"
+     (with-redefs [cli.cli-messages/game-difficulty-message
+     (fn [] "game difficulty")]
+        (should= "game difficulty\n"
+        (with-out-str
+          (with-in-str "2"
+            (cli-prompt-for-difficulty))))))
+
+    (it "returns game-mode key"
+      (with-redefs [cli.cli-messages/game-mode-message
+      (fn [] "")]
+        (should= :hard
+          (with-in-str "1"
+            (cli-prompt-for-difficulty)))
+        (should= :easy
+          (with-in-str "2"
+            (cli-prompt-for-difficulty)))
+        (should= :easy
+          (with-in-str "banana"
+            (cli-prompt-for-difficulty))))))
+ 
   (describe "cli-display-board"
     (it "prints board to command line"
       (with-redefs [cli.cli-messages/display-board
       (fn [board] "board here")]
         (should= "board here\n"
           (with-out-str(
-            cli-display-board ["board"])))))
+            cli-display-board ["board"]))))))
 
   (describe "human-win-message"
     (it "prints message to command line"
-      (with-redefs [cli.cli-messages/human-wins
-      (fn [] "human wins")]
-        (should= "human wins\n"
+      (with-redefs [cli.cli-messages/player-wins
+      (fn [player] "player wins")]
+        (should= "player wins\n"
           (with-out-str
-            (cli-human-win-message))))))
+            (cli-win-message "player"))))))
 
   (describe "computer-win-message"
     (it "prints message to command line"
@@ -47,4 +94,4 @@
         (fn [] "select index")]
           (should= 0
             (with-in-str "0"
-              (cli-prompt-for-move ["board"]))))))))
+              (cli-prompt-for-move ["board"])))))))
