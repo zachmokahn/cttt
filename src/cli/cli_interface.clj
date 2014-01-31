@@ -1,6 +1,10 @@
 (ns cli.cli-interface
   (:require [cli.cli-options :refer :all]
-            [cli.cli-messages :refer :all]))
+            [cli.cli-messages :refer :all])
+      (:use [clojure.java.shell :only [sh]]))
+
+(defn cli-clear-screen []
+  (println (:out (sh "clear"))))
 
 (defn cli-display-board [board]
   (println (display-board board)))
@@ -19,11 +23,13 @@
   (read-string (read-line)))
 
 (defn cli-prompt-for-game-mode []
+  (cli-clear-screen)
   (println (game-mode-message))
   (let [mode (read-string (read-line))]
     (cli.cli-options/determine-mode mode)))
 
 (defn cli-prompt-for-difficulty []
+  (cli-clear-screen)
   (println (game-difficulty-message))
   (let [difficulty (read-string (read-line))]
     (cli.cli-options/determine-difficulty difficulty)))

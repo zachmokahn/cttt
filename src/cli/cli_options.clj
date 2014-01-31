@@ -13,6 +13,7 @@
 (defn determine-mode [mode]
   (if (= mode 1) :pvc
   (if (= mode 2) :pvp
+  ;; Top Secret Mode
   (if (= mode 3) :cvc :pvc))))
 
 (defn determine-difficulty [difficulty]
