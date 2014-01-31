@@ -1,10 +1,22 @@
 # ttt
 
-### WIP : create gameplay options for the user
+### Playing the game
+(make sure you have leiningen installed)
 
-options include
+1. Clone the Repo and enter the directory
+``` $ git clone https://github.com/zachmokahn/cttt ```
+``` $ cd cttt```
 
-* choosing difficulty
-* choosing game mode (player vs. player / player vs. computer /
-  ....computer-vs-computer.....?)
-* choosing turn
+2. Run the game
+``` $ lein run ```
+
+You will be give 2 options for game mode
+* Player vs. Computer
+* Player vs. Player
+
+If you choose Player vs. Computer you will be given options
+for difficulty
+* Easy
+* Hard
+
+That's it, have fun
