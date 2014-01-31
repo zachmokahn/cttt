@@ -8,12 +8,12 @@
 
  (describe "cli-game-options-prompt"
    (it "prints game options for game-mode"
-     (with-redefs [cli.cli-messages/game-mode-message
-     (fn [] "game-mode")]
+     (with-redefs [cli.cli-interface/cli-clear-screen (fn [] "")]
+     (with-redefs [cli.cli-messages/game-mode-message (fn [] "game-mode")]
         (should= "game-mode\n"
         (with-out-str
           (with-in-str "2"
-            (cli-prompt-for-game-mode))))))
+            (cli-prompt-for-game-mode)))))))
 
     (it "returns game-mode key"
       (with-redefs [cli.cli-messages/game-mode-message
@@ -33,12 +33,12 @@
 
   (describe "cli-prompt-for-difficulty"
    (it "prints game options for difficulty"
-     (with-redefs [cli.cli-messages/game-difficulty-message
-     (fn [] "game difficulty")]
+     (with-redefs [cli.cli-interface/cli-clear-screen (fn [] "")]
+     (with-redefs [cli.cli-messages/game-difficulty-message (fn [] "game difficulty")]
         (should= "game difficulty\n"
         (with-out-str
           (with-in-str "2"
-            (cli-prompt-for-difficulty))))))
+            (cli-prompt-for-difficulty)))))))
 
     (it "returns game-mode key"
       (with-redefs [cli.cli-messages/game-mode-message
