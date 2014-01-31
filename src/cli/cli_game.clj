@@ -1,12 +1,8 @@
 (ns cli.cli-game
-  (:require [ttt.ai            :refer :all]
-            [ttt.board         :refer :all]
-            [ttt.constants     :refer :all]
+  (:require [ttt.board         :refer :all]
             [ttt.rules         :refer :all]
             [cli.cli-options   :refer :all]
-            [cli.cli-players   :refer :all]
-            [cli.cli-interface :refer :all]
-            [cli.cli-messages  :refer :all]))
+            [cli.cli-interface :refer :all]))
 
 (defn get-winner [board players]
   (if (win? board :player1)

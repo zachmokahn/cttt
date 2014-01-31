@@ -3,8 +3,8 @@
             [ttt.board :refer :all]
             [ttt.constants :refer :all]))
 
-(let [x (:player marker)
-      o (:computer marker)
+(let [x (:player1 marker)
+      o (:player2 marker)
       b (:blank marker)
       board [b b b b b b b b b]]
 
@@ -18,7 +18,7 @@
   (describe "move"
     (it "returns new vector with changed index"
       (should= [x b b b b b b b b]
-               (move new-board 0 :player))))
+               (move new-board 0 :player1))))
 
   (describe "empty-spaces"
     (it "returns seq of available space indexes"
