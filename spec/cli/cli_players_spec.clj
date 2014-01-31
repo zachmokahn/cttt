@@ -3,17 +3,6 @@
             [cli.cli-players :refer :all]))
 
 (describe "CLI PLAYERS SPEC"
-  (describe "players"
-  (it ":player returns cli-player"
-    (should= cli-human
-             (:player (cli-players :test))))
-  (it ":computer returns cli-computer"
-    (should= (cli-computer :test)
-             (:computer (cli-players :test))))
-  (it "successfully passes options"
-    (should= {:move ttt.ai/random-move }
-             (:computer (cli-players :easy)))))
-
 (describe "move"
   (describe "player"
     (it "prompts for move"

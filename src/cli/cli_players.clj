@@ -9,10 +9,3 @@
 
 (defn cli-computer [option]
   { :move (option cli-computer-difficulty) } )
-
-(defn cli-players [option]
-  { :player cli-human
-    :computer (cli-computer option) })
-
-(defn cli-change-turn [turn]
-  (if (= turn :player1) :player2 :player1))
