@@ -2,14 +2,14 @@
   (:require [speclj.core :refer :all]
             [ttt.constants :refer :all]))
 
-(describe "Constant Spec"
+(describe "TTT CONSTANTS SPEC"
   (describe "marker"
-    (it ":player is 'x'"
+    (it ":player1 is 'x'"
       (should= "x"
-               (:player marker)))
-    (it ":computer is 'o'"
+               (:player1 marker)))
+    (it ":player2 is 'o'"
       (should= "o"
-               (:computer marker)))
+               (:player2 marker)))
     (it ":blank is '-'"
       (should= "-"
                (:blank marker)))))

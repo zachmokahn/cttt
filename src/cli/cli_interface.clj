@@ -1,5 +1,6 @@
 (ns cli.cli-interface
-  (:require [cli.cli-messages :refer :all]))
+  (:require [cli.cli-options :refer :all]
+            [cli.cli-messages :refer :all]))
 
 (defn cli-display-board [board]
   (println (display-board board)))
@@ -7,8 +8,8 @@
 (defn cli-draw-message []
   (println (draw-message)))
 
-(defn cli-human-win-message []
-  (println (human-wins)))
+(defn cli-win-message [player]
+  (println (player-wins player)))
 
 (defn cli-computer-win-message []
   (println (computer-wins)))
@@ -16,3 +17,23 @@
 (defn cli-prompt-for-move [board]
   (println (move-prompt-message))
   (read-string (read-line)))
+
+(defn cli-prompt-for-game-mode []
+  (println (game-mode-message))
+  (let [mode (read-string (read-line))]
+    (cli.cli-options/determine-mode mode)))
+
+(defn cli-prompt-for-difficulty []
+  (println (game-difficulty-message))
+  (let [difficulty (read-string (read-line))]
+    (cli.cli-options/determine-difficulty difficulty)))
+
+(defn get-difficulty [mode]
+  (if (= mode :pvp) :easy
+      (cli-prompt-for-difficulty)))
+
+(defn cli-prompt-for-options []
+  (let [mode        (cli-prompt-for-game-mode)
+        difficulty  (get-difficulty mode) ]
+   {:game-mode mode,
+    :difficulty difficulty} ))

@@ -15,11 +15,21 @@
 (defn draw-message []
   "Game is a draw")
 
-(defn human-wins []
-  "The human has won the game!")
+(defn player-wins [player]
+  (str player " has won the game!"))
 
 (defn computer-wins []
   "All hail the machine!")
 
 (defn move-prompt-message []
   "Choose your fate")
+
+(defn game-mode-message []
+  (str "Please choose a game mode\n"
+       "1. Player vs. Computer\n"
+       "2. Player vs. Player\n"))
+
+(defn game-difficulty-message []
+  (str "Please choose a difficulty\n"
+       "1. Difficult\n"
+       "2. Easy\n"))

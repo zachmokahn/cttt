@@ -10,7 +10,7 @@
   (= (get board index) (:blank marker)))
 
 (defn change-turn [turn]
-  (if (= turn :computer) :player :computer))
+  (if (= turn :player1) :player2 :player1))
 
 (defn map-winning-combos [board token]
   (filter (fn [combo] (every? (fn [marker] (= marker token))
@@ -20,8 +20,8 @@
   (not (empty? (map-winning-combos board (turn marker)))))
 
 (defn any-winner? [board]
-  (or (win? board :player)
-      (win? board :computer)))
+  (or (win? board :player1)
+      (win? board :player2)))
 
 (defn draw? [board]
   (and (not-any? (fn [value] (= value (:blank marker))) board)

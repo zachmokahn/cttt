@@ -3,11 +3,11 @@
             [ttt.constants :refer :all]
             [cli.cli-messages :refer :all]))
 
-(let [x (:player marker)
-      o (:computer marker)
+(let [x (:player1 marker)
+      o (:player2 marker)
       b (:blank marker)]
 
-(describe "Messages Spec"
+(describe "CLI MESSAGES SPEC"
   (describe "render"
     (it "return value if occupied"
       (should= (format " %s " x)
@@ -26,12 +26,24 @@
                 (display-board [b b b b b b b b b])
                   )))
   (describe "displays correct messages"
-    (it "human-wins"
-      (should= "The human has won the game!"
-               (human-wins)))
+    (it "player-wins"
+      (should= "banana has won the game!"
+               (player-wins "banana")))
     (it "computer-wins"
       (should= "All hail the machine!"
                (computer-wins)))
     (it "move-prompt-message"
       (should= "Choose your fate"
-               (move-prompt-message))))))
+               (move-prompt-message)))
+    (it "game-mode-message"
+      (should= (str
+               "Please choose a game mode\n"
+               "1. Player vs. Computer\n"
+               "2. Player vs. Player\n")
+               (game-mode-message)))
+    (it "game-difficulty-message"
+      (should= (str
+               "Please choose a difficulty\n"
+               "1. Difficult\n"
+               "2. Easy\n")
+               (game-difficulty-message))))))

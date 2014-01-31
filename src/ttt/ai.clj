@@ -61,7 +61,11 @@
     (determine-score board turn opponent depth)
     (alternate-next-best-moves board opponent depth))))
 
-(defn best-move [board]
+(defn best-move [board turn]
   "randomly chooses any of the moves that have the highest success
    yield"
-  (rand-nth (best-moves board :computer)))
+  (rand-nth (best-moves board turn)))
+
+(defn random-move [board turn]
+  "randomly chooses an available index"
+  (rand-nth (empty-spaces board)))

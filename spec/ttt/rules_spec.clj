@@ -4,13 +4,14 @@
             [ttt.rules :refer :all]))
 
 (let [b (:blank marker)
-      x (:player marker)
-      o (:computer marker)
+      x (:player1 marker)
+      o (:player2  marker)
       new-board [b b b b b b b b b]
      draw-board [o x o x o x x o x]
     x-win-board [x x x b b b b b b]
     o-win-board [o o o b b b b b b]]
-(describe "Rules Spec"
+
+(describe "TTT RULES SPEC"
   (describe "valid-move?"
     (it "returns true if the space is empty"
       (should= true
@@ -23,28 +24,28 @@
 
   (describe "change-turn"
     (it ":computer returns :player"
-      (should= :player
-               (change-turn :computer)))
+      (should= :player1
+               (change-turn :player2)))
     (it ":player returns :computer"
-      (should= :computer
-               (change-turn :player))))
+      (should= :player1
+               (change-turn :player2))))
 
 (describe "win?"
     (it "returns false if there is no winner"
         (should= false
-                 (win? new-board :player))
+                 (win? new-board :player1))
         (should= false
-                 (win? new-board :computer))
+                 (win? new-board :player2))
         (should= false
-                 (win? draw-board :player))
+                 (win? draw-board :player1))
         (should= false
-                 (win? draw-board :computer)))
+                 (win? draw-board :player2)))
     (it "returns true if :player wins"
         (should= true
-          (win? x-win-board :player)))
+          (win? x-win-board :player1)))
     (it "returns true if :computer wins"
         (should= true
-          (win? o-win-board :computer))))
+          (win? o-win-board :player2))))
 
   (describe "draw?"
     (it "returns false if the game is not over"
