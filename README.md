@@ -4,8 +4,11 @@
 (make sure you have leiningen installed)
 
 1. Clone the Repo and enter the directory
-``` $ git clone https://github.com/zachmokahn/cttt ```
-``` $ cd cttt```
+2. 
+``` 
+$ git clone https://github.com/zachmokahn/cttt
+$ cd cttt
+```
 
 2. Run the game
 ``` $ lein run ```
