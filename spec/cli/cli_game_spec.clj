@@ -49,15 +49,15 @@
                  (get-results board-o pvp)))))
 
   (describe "get-move"
+    (around [it]
+      (with-out-str (it)))
     (it "calls best-move -> :hard :computer"
       (should= (ttt.ai/best-move available-board :player2)
-               (get-move available-board :player2 pvc :hard)))
-
+                 (get-move available-board :player2 pvc :hard)))
     (it "calls random-move -> :easy :computer"
       (should= (ttt.ai/random-move available-board :player2)
                (get-move available-board :player2 pvc :easy)))
-
-    (it "calls cli-prompt -> :easy :player"
+    (it "calls cli-prompt -> :player"
       (with-redefs [cli.cli-interface/cli-prompt-for-move
                     (fn [board] "prompt")]
       (should= "prompt"

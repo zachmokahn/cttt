@@ -4,4 +4,6 @@
             [cli.cli-game :refer :all]))
 
 (defn -main []
-  (game new-board :player1 (cli-prompt-for-options)))
+  (cli-clear-screen)
+  (game new-board :player1 (cli-prompt-for-options))
+  (System/exit 0))
