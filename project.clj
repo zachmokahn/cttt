@@ -1,6 +1,6 @@
-(defproject ttt "0.1.0-SNAPSHOT"
-  :description "FIXME: write description"
-  :url "http://example.com/FIXME"
+(defproject ttt "1.0.0"
+  :description "Command Line implementation of Tic Tac Toe in Clojure"
+  :url "http://github.com/zachmokahn/cttt"
   :license {:name "Eclipse Public License"
             :url "http://www.eclipse.org/legal/epl-v10.html"}
   :dependencies [[org.clojure/clojure "1.5.1"]]
