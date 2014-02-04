@@ -47,6 +47,25 @@
         (should= true
           (win? o-win-board :player2))))
 
+  (describe "winnable?"
+    (it "returns false if the win is blocked"
+      (should= false
+               (winnable? ["x" "x" "o"
+                           "-" "-" "-"
+                           "-" "-" "-"] :player1)))
+    
+    (it "returns false if the board is not winnable"
+      (should= false
+               (winnable? ["x" "-" "-"
+                           "-" "-" "x"
+                           "-" "-" "-"] :player1)))
+
+    (it "returns true if the game is winnable"
+      (should= true
+               (winnable? ["x" "x" "-"
+                           "-" "-" "-"
+                           "-" "-" "-"] :player1))))
+
   (describe "draw?"
     (it "returns false if the game is not over"
         (should= false

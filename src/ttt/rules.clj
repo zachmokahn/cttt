@@ -16,8 +16,26 @@
   (filter (fn [combo] (every? (fn [marker] (= marker token))
     (map (fn [index] (get board index)) combo))) winning-combos))
 
+(defn get-tokens [token coll]
+  (filter #(= token %) coll))
+
+(defn get-blanks [coll]
+  (filter #(= (:blank marker) %) coll))
+
+(defn almost-won? [token coll]
+  (and (= 1 (count (get-blanks coll)))
+       (= 2 (count (get-tokens token coll)))))
+
+(defn almost-won-combos [board token]
+  (filter (fn [combo]
+    (almost-won? token
+      (map #(get board %) combo))) winning-combos))
+
 (defn win? [board turn]
   (not (empty? (map-winning-combos board (turn marker)))))
+
+(defn winnable? [board turn]
+  (not (empty? (almost-won-combos board (turn marker)))))
 
 (defn any-winner? [board]
   (or (win? board :player1)

@@ -44,6 +44,9 @@
    of turns it take to be resolved"
   (if (win? board turn) (- 10 depth) 0 ))
 
+(defn determine-winability [board turn depth]
+  (if (winnable? board turn) (- 9 depth) 0))
+
 (defn board-scores [board spaces turn]
   "calculates the score of each available move"
   (map #(minimax (move board % turn) turn 0 -10 10) spaces))
@@ -75,6 +78,8 @@
    is met (game over) or it alternates the turn and recurs until a
    resolution is met that is within the alpha-beta range"
   (let [opponent (change-turn turn)]
-    (if (or (game-over? board) (= depth 5))
+    (if (game-over? board)
     (determine-score board turn depth)
-    (alternate-next-best-moves board opponent depth alpha beta))))
+    (if (= depth 3)
+    (determine-winability board turn depth)
+    (alternate-next-best-moves board opponent depth alpha beta)))))
