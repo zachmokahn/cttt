@@ -26,13 +26,10 @@
   (describe "determine-score"
     (it "returns 10 if move is win for current-turn"
       (should= 10
-      (determine-score [o o o o o o o o o] :player2 :player1 0)))
-    (it "returns -10 if move is a win for opponent"
-      (should= -10
-      (determine-score [o o o o o o o o o] :player1 :player2 0)))
+      (determine-score [o o o o o o o o o] :player2 0)))
     (it "returns 0 if board is a draw"
       (should= 0
-      (determine-score [x o x x o x o x o]:player1 :player2 0))))
+      (determine-score [x o x x o x o x o] :player1 0))))
 
   (describe "all-moves"
     (it "returns the moves with highest yield"
