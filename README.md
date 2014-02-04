@@ -29,7 +29,7 @@ That's it, have fun
 
 ===
 
-Specs
+### Specs
 
 To run the specs in the console type:
 ```
