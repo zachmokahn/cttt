@@ -45,7 +45,12 @@
   (if (win? board turn) (- 10 depth) 0 ))
 
 (defn determine-winability [board turn depth]
-  (if (winnable? board turn) (- 9 depth) 0))
+  (if (or (winnable? board (change-turn turn))
+          (and (not (winnable? board turn))
+               (set-for-double? board (change-turn turn)))) 0
+  (if (set-for-double? board turn) (- 9 depth)
+      (- (+ 6 (count (almost-won-combos board turn)))
+         (count (almost-won-combos board (change-turn turn)))))))
 
 (defn board-scores [board spaces turn]
   "calculates the score of each available move"
@@ -80,6 +85,6 @@
   (let [opponent (change-turn turn)]
     (if (game-over? board)
     (determine-score board turn depth)
-    (if (= depth 3)
+    (if (= depth 2)
     (determine-winability board turn depth)
     (alternate-next-best-moves board opponent depth alpha beta)))))

@@ -66,6 +66,17 @@
                            "-" "-" "-"
                            "-" "-" "-"] :player1))))
 
+  (describe "set-for-double?"
+    (it "return false if next move doesn't result in fork"
+      (should= false
+               (set-for-double? ["o" "x" "-"
+                                 "x" "o" "-"
+                                 "-" "-" "-"] :player1)))
+    (it "return true if next move results in fork"
+      (should= true
+               (set-for-double? ["-" "x" "-"
+                                 "x" "-" "-"
+                                 "-" "-" "-"] :player1))))
   (describe "draw?"
     (it "returns false if the game is not over"
         (should= false

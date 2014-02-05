@@ -1,5 +1,6 @@
 (ns ttt.rules
-  (:require [ttt.constants :refer :all]))
+  (:require [ttt.board :refer :all]
+            [ttt.constants :refer :all]))
 
 (def winning-combos
   [[0 1 2] [3 4 5] [6 7 8]
@@ -37,6 +38,10 @@
 (defn winnable? [board turn]
   (not (empty? (almost-won-combos board (turn marker)))))
 
+(defn set-for-double? [board turn]
+  (let [spaces (empty-spaces board)]
+    (not (not-any? #(> (count (almost-won-combos (move board % turn) (turn marker))) 1 ) spaces))))
+
 (defn any-winner? [board]
   (or (win? board :player1)
       (win? board :player2)))
@@ -47,3 +52,12 @@
 
 (defn game-over? [board]
   (or (draw? board) (any-winner? board)))
+
+
+;;;;
+(let [x "x"
+      o "o"
+      b "-"]
+(count (almost-won-combos [x x x o o b b b b] x)))
+
+(> 0 1)

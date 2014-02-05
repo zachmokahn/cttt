@@ -1,5 +1,6 @@
 (ns cli.cli-game
   (:require [ttt.board         :refer :all]
+            [ttt.ai :refer :all]
             [ttt.rules         :refer :all]
             [cli.cli-options   :refer :all]
             [cli.cli-interface :refer :all]))
@@ -18,16 +19,24 @@
     (cli-draw-message)
     (get-winner board players)))
 
+;; (defn get-move [board turn players difficulty]
+;;   (let [moves (all-moves board turn)]
+;;   (if (= (turn players) :computer) (println moves)
+;;   (if (= (turn players) :player)
+;;       (cli-prompt-for-move board)
+;;       ((difficulty cli-computer-difficulty) board turn)))))
+
 (defn get-move [board turn players difficulty]
-  (if (= (turn players) :computer) (println "Thinking....."))
+  (let [moves (all-moves board turn)]
+  (if (= (turn players) :computer) (println moves))
   (if (= (turn players) :player)
       (cli-prompt-for-move board)
-      ((difficulty cli-computer-difficulty) board turn)))
+      ((difficulty cli-computer-difficulty) board turn))))
 
 (defn game [board turn option]
   (let [game-mode  (:game-mode  option)
         players    (game-mode cli-game-play)]
-    (cli-clear-screen)
+    ;; (cli-clear-screen)
     (cli-display-board board)
     (if (game-over? board)
       (get-results board players)

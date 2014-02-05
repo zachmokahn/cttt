@@ -9,16 +9,21 @@
   (describe "algorithm"
     (it "returns 0 if its a winning move"
       (should= 0
-      (best-move [b o o
+      (best-moves [b o o
                   b b b
                   b b b] :player2)))
     (it "returns 0 if its a blocking move"
       (should= 0
-      (best-move [b x x
+      (best-moves [b x x
                   b b b
                   b b b] :player2)))
+    (it "CAN FREAKING WIN"
+      (should= 0
+      (all-moves [b b b
+                  b x b
+                  b b b] :player2)))
     (it "prevents a fork"
-      (should-contain (best-move [b b x
+      (should-contain (best-moves [b b x
                                   b o b
                                   x b b] :player2)
                       [1 3 5 7])))
