@@ -47,6 +47,27 @@
         (should= true
           (win? o-win-board :player2))))
 
+  (describe "#almost-won-combos"
+    (it "returns indexes of almost winnable combos"
+      (should-contain [0 1 2]
+                      (almost-won-combos
+                        ["x" "x" "-"
+                         "-" "-" "-"
+                         "-" "-" "-"] :player1))
+      (should-contain [0 4 8]
+                      (almost-won-combos
+                        ["o" "-" "-"
+                         "-" "o" "-"
+                         "-" "-" "-"] :player2))))
+
+  (describe "#can-win-combos"
+    (it "returns indexes of possible winnable combos"
+      (should-contain [0 1 2]
+                      (can-win-combos
+                        ["x" "-" "-"
+                         "-" "-" "-"
+                         "-" "-" "-"] :player1))))
+
   (describe "draw?"
     (it "returns false if the game is not over"
         (should= false
