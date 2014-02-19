@@ -2,6 +2,7 @@
   (:require [speclj.core :refer :all]
             [ttt.constants :refer :all]
             [ttt.ai :refer :all]))
+
 (let [b (:blank marker)
       x (:player1 marker)
       o (:player2 marker)]
@@ -18,17 +19,19 @@
                   b b b
                   b b b] :player2)))
     (it "prevents a fork"
-      (should-contain (best-move [b b x
-                                  b o b
-                                  x b b] :player2)
-                      [1 3 5 7])))
+      (should-contain (best-move  [b b x
+                                   b o b
+                                   x b b] :player2)
+                       [1 3 5 7]))
+    (it "returns the middle on the first move"
+      (should= 4 (best-move [b b b b b b b b b] :player2))))
 
   (describe "determine-score"
-    (it "returns 10 if move is win for current-turn"
-      (should= 10
+    (it "returns 3 if move is win for current-turn"
+      (should= 3
       (determine-score [o o o o o o o o o] :player2 0)))
     (it "returns 0 if board is a draw"
-      (should= 0
+      (should= 0.0
       (determine-score [x o x x o x o x o] :player1 0))))
 
   (describe "all-moves"

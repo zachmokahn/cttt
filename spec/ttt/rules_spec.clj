@@ -47,24 +47,26 @@
         (should= true
           (win? o-win-board :player2))))
 
-  (describe "winnable?"
-    (it "returns false if the win is blocked"
-      (should= false
-               (winnable? ["x" "x" "o"
-                           "-" "-" "-"
-                           "-" "-" "-"] :player1)))
-    
-    (it "returns false if the board is not winnable"
-      (should= false
-               (winnable? ["x" "-" "-"
-                           "-" "-" "x"
-                           "-" "-" "-"] :player1)))
+  (describe "#almost-won-combos"
+    (it "returns indexes of almost winnable combos"
+      (should-contain [0 1 2]
+                      (almost-won-combos
+                        ["x" "x" "-"
+                         "-" "-" "-"
+                         "-" "-" "-"] :player1))
+      (should-contain [0 4 8]
+                      (almost-won-combos
+                        ["o" "-" "-"
+                         "-" "o" "-"
+                         "-" "-" "-"] :player2))))
 
-    (it "returns true if the game is winnable"
-      (should= true
-               (winnable? ["x" "x" "-"
-                           "-" "-" "-"
-                           "-" "-" "-"] :player1))))
+  (describe "#can-win-combos"
+    (it "returns indexes of possible winnable combos"
+      (should-contain [0 1 2]
+                      (can-win-combos
+                        ["x" "-" "-"
+                         "-" "-" "-"
+                         "-" "-" "-"] :player1))))
 
   (describe "draw?"
     (it "returns false if the game is not over"
